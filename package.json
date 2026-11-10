@@ -1,8 +1,8 @@
 {
   "name": "kha",
   "productName": "kha",
-  "version": "1.2.0",
-  "description": "kha v1 \u2014 Steam Lua, Manifest and Depot manager",
+  "version": "1.4.0",
+  "description": "kha v1 — Steam Lua, Manifest and Depot manager",
   "main": "main.cjs",
   "private": true,
   "scripts": {
@@ -22,6 +22,7 @@
       "app.js",
       "style.css",
       "steam-ui.js",
+      "fixes-ui.js",
       "assets/**/*",
       "main.cjs",
       "preload.cjs",

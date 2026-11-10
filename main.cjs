@@ -15,7 +15,8 @@ if(!app.requestSingleInstanceLock()){app.quit();}else{
  app.whenReady().then(()=>{
   createWindow();
   require('./engine/ticket.cjs')(app,ipcMain,()=>win);
-  require('./engine/desktop.cjs')(app,ipcMain,()=>win);
+  const engine=require('./engine/desktop.cjs')(app,ipcMain,()=>win);
+  require('./engine/fixes.cjs')(app,ipcMain,()=>win,()=>engine.status().root);
   ipcMain.handle('open-game',async(event,id,store)=>{
    if(!win||event.sender!==win.webContents||!/^\d{1,12}$/.test(String(id)))return false;
    await shell.openExternal(store===true?`https://store.steampowered.com/app/${id}/`:`steam://rungameid/${id}`);return true;
