@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data:; img-src 'self' data: https://cdn.cloudflare.steamstatic.com; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'">
+<meta name="theme-color" content="#101111">
+<title>kha — مكتبتك، على طريقتك</title>
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script src="engine/lua-core.js" defer></script><script src="app.js" defer></script><script src="steam-ui.js" defer></script>
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar" id="sidebar">
+<a class="brand" href="#home" aria-label="kha الرئيسية"><img src="assets/logo.svg" alt=""><span dir="ltr">kha<span class="brand-dot">.</span></span></a>
+<div class="workspace-tag">مساحتك الخاصة للألعاب</div>
+<div class="nav-label">مساحة اللعب</div>
+<nav aria-label="التنقل الرئيسي" id="navigation"></nav>
+<div class="sidebar-note"><span class="note-spark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.8 6.4.9-4.6 4.5 1.1 6.4-5.7-3-5.7 3 1.1-6.4-4.6-4.5 6.4-.9Z"/></svg></span><strong>كل ألعابك. مكان واحد.</strong><p>نظّم مكتبتك، واحفظ لحظاتك.<br>بأسلوب يشبهك.</p><button class="text-action" id="side-add">أضف لعبتك الأولى <span>↗</span></button></div>
+<div class="local-status"><span class="status-dot"></span><span>محليّ. خاص. ملكك.</span><span class="version" dir="ltr">v1.2</span></div>
+<button class="profile" id="profile-button"><span class="avatar">K</span><span><strong id="sidebar-name">لاعب kha</strong><small>ملف شخصي محلي</small></span><span class="profile-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9 5 5 5-5"/></svg></span></button>
+</aside>
+<div class="sidebar-shade" id="shade"></div>
+<main class="main">
+<header class="topbar"><div class="topbar-start"><button id="menu-button" class="icon-button mobile-menu" aria-label="فتح القائمة"></button><span class="breadcrumb">مساحتك <span>/</span> <b id="breadcrumb">الرئيسية</b></span></div><div class="topbar-actions"><div class="search-box"><span id="search-icon"></span><input type="search" id="global-search" placeholder="ابحث في مكتبتك..." aria-label="ابحث في مكتبتك"><kbd>/</kbd></div><span class="offline-badge"><span class="status-dot"></span>بدون ربط سحابي</span><button id="settings-shortcut" class="icon-button" aria-label="الإعدادات"></button></div></header>
+<div id="content" class="content"></div>
+<footer class="footer"><span dir="ltr">kha<span class="yellow">.</span> <span class="footer-tag">PLAY YOUR WAY</span></span><span>صُمّم ليكون لك، لا ليشبه الجميع.</span></footer>
+</main>
+</div>
+<dialog id="game-dialog" aria-labelledby="game-dialog-title"><form id="game-form"><div class="dialog-heading"><div><div class="eyebrow">YOUR NEXT ADVENTURE</div><h2 id="game-dialog-title">أضف لعبة لمكتبتك</h2></div><button type="button" class="icon-button close-dialog" aria-label="إغلاق">✕</button></div><label>اسم اللعبة<input id="game-name" required maxlength="100" placeholder="مثل: Cyberpunk 2077"></label><div class="form-grid"><label>رقم Steam App ID <span class="optional">اختياري</span><input id="game-appid" inputmode="numeric" pattern="[0-9]{1,12}" maxlength="12" placeholder="1091500" dir="ltr"><small>تجده في رابط صفحة اللعبة على Steam.</small></label><label>التصنيف<select id="game-genre"><option>مغامرات</option><option>أكشن</option><option>تقمّص أدوار</option><option>استراتيجية</option><option>سباقات</option><option>أخرى</option></select></label></div><label>الحالة<select id="game-status"><option value="backlog">لاحقًا</option><option value="playing">ألعب الآن</option><option value="completed">مكتملة</option></select></label><label>ملاحظاتك<textarea id="game-notes" rows="3" maxlength="2000" placeholder="مهمتك القادمة، أو انطباعك الأول..."></textarea></label><p class="form-note">الإضافة تنظّم مكتبتك فقط؛ لا تمنح ترخيصًا ولا تثبّت اللعبة.</p><div class="dialog-actions"><button type="submit" class="button primary" id="save-game">إضافة إلى المكتبة</button><button type="button" class="button secondary close-dialog">إلغاء</button></div></form></dialog>
+<dialog id="details-dialog" class="details-dialog" aria-label="تفاصيل اللعبة"><div id="details-content"></div></dialog>
+<dialog id="session-dialog" aria-labelledby="session-dialog-title"><form id="session-form"><div class="dialog-heading"><h2 id="session-dialog-title">تعديل الجلسة</h2><button type="button" class="icon-button close-dialog" aria-label="إغلاق">✕</button></div><input id="session-id" type="hidden"><div class="form-grid"><label>بداية الجلسة<input id="session-start" type="datetime-local" required></label><label>نهاية الجلسة<input id="session-end" type="datetime-local" required></label></div><p class="form-note">يُعدّل السجل المحلي داخل kha فقط، ولا يغيّر ساعات Steam.</p><div class="dialog-actions"><button type="submit" class="button primary">حفظ</button><button type="button" class="button secondary close-dialog">إلغاء</button></div></form></dialog>
+<dialog id="confirm-dialog" aria-labelledby="confirm-title"><div class="dialog-heading"><h2 id="confirm-title">تأكيد الإجراء</h2><button class="icon-button close-dialog" aria-label="إغلاق">✕</button></div><p id="confirm-text"></p><div class="dialog-actions"><button class="button danger" id="confirm-yes">تأكيد</button><button class="button secondary close-dialog">إلغاء</button></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div><input type="file" accept="application/json,.json" id="import-file" hidden>
+</body></html>

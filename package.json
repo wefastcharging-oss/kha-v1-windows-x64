@@ -1,0 +1,39 @@
+{
+  "name": "kha",
+  "productName": "kha",
+  "version": "1.2.0",
+  "description": "kha v1 \u2014 Steam Lua, Manifest and Depot manager",
+  "main": "main.cjs",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test tests/*.test.cjs",
+    "build:win": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "45.2.0",
+    "electron-builder": "26.0.12"
+  },
+  "build": {
+    "appId": "app.kha.library",
+    "productName": "kha",
+    "files": [
+      "index.html",
+      "app.js",
+      "style.css",
+      "steam-ui.js",
+      "assets/**/*",
+      "main.cjs",
+      "preload.cjs",
+      "engine/**/*",
+      "licenses/**/*"
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "assets/kha.ico"
+    }
+  },
+  "dependencies": {
+    "adm-zip": "0.5.16"
+  }
+}
