@@ -12,7 +12,7 @@ function fcard(f){const rec=FX.applied[f.id];return `<article class="tool-card m
 function fpage(){
  const list=FX.list.filter(f=>(FX.kind==='all'||f.kind===FX.kind)&&(!FX.mine||owned(f.appid))&&(!FX.q||f.name.toLowerCase().includes(FX.q)||f.game.toLowerCase().includes(FX.q)||f.appid.includes(FX.q)));
  const mineCount=FX.list.filter(f=>owned(f.appid)).length;
- return title('FIX. LAUNCH. PLAY.','اصلاحات.','فهرس إصلاحات، تنزيل بضغطة، ونسخة رجوع لكل ملف.',false)+
+ return luaPanel()+title('FIX. LAUNCH. PLAY.','اصلاحات.','فهرس إصلاحات، تنزيل بضغطة، ونسخة رجوع لكل ملف.',false)+
  `<div class="tool-page-actions">${btn(I('upload')+' استيراد حزمة','fix-import','','primary')}${btn('تحديث الفهرس','fix-refresh')}${btn(FX.mine?'كل الإصلاحات':'لألعابي فقط','fix-mine')}${btn('فتح المخزن','fix-open-store')}</div>`+
  `<div class="toolbar"><input id="fix-q" class="sort-select" style="flex:1" type="search" placeholder="ابحث باسم اللعبة أو App ID" value="${E(FX.q)}"><div class="filter-buttons">${[['all','الكل'],['lua','Lua'],['files','ملفات']].map(([v,t])=>`<button class="filter-button ${FX.kind===v?'active':''}" data-fixkind="${v}">${t}</button>`).join('')}</div></div>`+
  `<div class="tool-hint"><strong>قبل التطبيق</strong><p>أغلق Steam واللعبة. إصلاحات Lua تذهب إلى <bdi>config/stplug-in</bdi>، وإصلاحات الملفات إلى مجلد اللعبة. كل ملف يُستبدل يُحفظ في <bdi>.kha-fix</bdi>، والتراجع يعيده.</p></div>`+
