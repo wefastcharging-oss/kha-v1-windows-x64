@@ -24,6 +24,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Compile ticket wrapper
+        run: |
+          New-Item -ItemType Directory -Force engine\ticket-generator | Out-Null
+          & "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe" /nologo /optimize /target:exe /out:engine\ticket-generator\TicketTerminal.exe engine\TicketTerminal.cs
+        shell: pwsh
+
       - name: Build portable EXE
         run: npm run build:win
 
