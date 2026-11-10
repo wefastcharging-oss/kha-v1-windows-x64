@@ -1,0 +1,5 @@
+[
+  {"id":"demo-mgsv-lua","name":"MGSV — تفعيل Lua","appid":"287700","game":"METAL GEAR SOLID V","version":"1.0","author":"kha","notes":"ملف Lua يُوضع في stplug-in.","kind":"lua","url":"","sha256":"","bytes":0},
+  {"id":"demo-pragmata-lua","name":"PRAGMATA — تفعيل Lua","appid":"3357650","game":"PRAGMATA","version":"1.0","author":"kha","notes":"دينوفو: شغّل اللعبة بعد التطبيق مباشرة.","kind":"lua","url":"","sha256":"","bytes":0},
+  {"id":"demo-dd2-files","name":"Dragon's Dogma 2 — ملفات إصلاح","appid":"2054970","game":"Dragon's Dogma 2","version":"1.0","author":"kha","notes":"حزمة ملفات تُنسخ داخل مجلد اللعبة.","kind":"files","url":"","sha256":"","bytes":0}
+]
