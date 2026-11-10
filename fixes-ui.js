@@ -40,5 +40,13 @@ document.addEventListener('click',e=>{
  const k=e.target.closest('[data-fixkind]');if(k){FX.kind=k.dataset.fixkind;render();}
 });
 document.addEventListener('input',e=>{if(e.target.id==='fix-q'){FX.q=e.target.value.trim().toLowerCase();const c=$('#content');render();const i=$('#fix-q');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length);}}});
+const lq=(c,a={})=>window.khaDesktop.lua(c,a).then(r=>{if(!r?.ok)throw Error(r?.error||'فشل');return r.value;});
+const luaPanel=()=>`<div class="tool-card"><div class="managed-top"><span class="tool-chip good">Lua</span><span class="tool-chip">مصادر خارجية</span></div><h2>تنزيل Lua مباشرة</h2><p class="tool-muted">يجلب السكربت من ManifestHub أو مولّد steamtools.games ويكتبه في stplug-in مع نسخة رجوع.</p><div class="tool-action-row"><input id="fix-lua-id" class="sort-select" dir="ltr" inputmode="numeric" placeholder="Steam App ID" value="${E(FX.lua||'')}">${btn(I('download')+' جلب وتثبيت','fix-lua-get','','primary')}${btn('فتح stplug-in','fix-lua-open')}</div>${FX.installed.length?`<p class="tool-muted">من ألعابك المثبتة:</p><div class="tool-action-row" style="flex-wrap:wrap">${FX.installed.slice(0,8).map(g=>`<button class="button secondary" data-fxtool="fix-lua-game" data-appid="${E(g.appid)}">${E(g.name)}</button>`).join('')}</div>`:''}</div>`;
+Object.assign(ACT,{
+ 'fix-lua-get':async()=>{const id=(FX.lua||'').trim();if(!/^\d{1,12}$/.test(id))throw Error('App ID غير صالح.');const r=await lq('get',{appid:id});toast('ثُبّت Lua — '+r.source);},
+ 'fix-lua-game':async b=>{const r=await lq('get',{appid:b.dataset.appid});toast('ثُبّت Lua — '+r.source);},
+ 'fix-lua-open':()=>lq('open')
+});
+document.addEventListener('input',e=>{if(e.target.id==='fix-lua-id')FX.lua=e.target.value;});
 nav();render();
 })();
