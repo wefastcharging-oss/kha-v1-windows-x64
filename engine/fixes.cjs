@@ -103,6 +103,7 @@ module.exports=function attach(app,ipcMain,getWindow,getSteamRoot){
  async function applyFix(win,args){
   const fix=merged().find(f=>f.id===args.id);if(!fix)throw Error('الإصلاح غير موجود.');
   if(applied[fix.id])throw Error('مطبّق بالفعل. تراجع أولًا.');
+ if(fix.origin==='builtin'&&!(fix.files||[]).length){const o=await require('./lua-source.cjs').fetchLua(fix.appid);fix.files=[{rel:fix.appid+'.lua',sha256:sha(Buffer.from(o.lua)),bytes:Buffer.byteLength(o.lua)}];const dd=path.join(store,fix.id,DATA,fix.appid+'.lua');fs.mkdirSync(path.dirname(dd),{recursive:true});await fsp.writeFile(dd,o.lua);fix.origin='cached';}
   await ensureLocal(fix);
   let dir,label;
   if(fix.kind==='lua'){
