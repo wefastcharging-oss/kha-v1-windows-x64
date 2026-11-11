@@ -1,6 +1,6 @@
 'use strict';
 const AdmZip=require('adm-zip');
-const T=25000,H='https://raw.githubusercontent.com/steamtoolsapp/ManifestHub',G='https://steamtools.games/api/generate';
+const T=25000,H=['https://raw.githubusercontent.com/steamtools-games/ManifestHub3','https://raw.githubusercontent.com/manilua-hub/ManifestHub3','https://raw.githubusercontent.com/SteamAutoCracks/ManifestHub'],G='https://steamtools.games/api/generate';
 async function get(u,i={}){const a=new AbortController(),t=setTimeout(()=>a.abort(),T);try{return await fetch(u,{...i,signal:a.signal,headers:{'user-agent':'kha/1.5',...(i.headers||{})}});}finally{clearTimeout(t);}}
 function pick(buf){const z=new AdmZip(buf),es=z.getEntries();const l=es.find(e=>!e.isDirectory&&/_public\.lua$/i.test(e.entryName))||es.find(e=>!e.isDirectory&&/\.lua$/i.test(e.entryName));if(!l)return null;const k=es.find(e=>!e.isDirectory&&/^key\.vdf$/i.test(e.entryName));return{lua:l.getData().toString('utf8'),keyVdf:k?k.getData().toString('utf8'):null};}
 async function hub(id){const r=await get(H+'/'+id+'/'+id+'.lua');if(!r.ok)return null;const t=await r.text();return/addappid\s*\(/i.test(t)?{lua:t,keyVdf:null,source:'ManifestHub'}:null;}
