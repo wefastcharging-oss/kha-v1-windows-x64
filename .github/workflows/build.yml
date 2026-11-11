@@ -23,6 +23,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+      - name: Fetch ticket generator binary
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri 'https://github.com/denuvosanctuary/steam-ticket-generator/releases/download/v1.2.1/steam-ticket-generator-windows.zip' -OutFile engine\stg.zip
+          Expand-Archive engine\stg.zip -DestinationPath engine\ticket-generator -Force
+          Get-ChildItem engine\ticket-generator -Filter *.exe | Where-Object Name -ne 'steam-ticket-generator.exe' | Rename-Item -NewName steam-ticket-generator.exe
 
       - name: Compile ticket wrapper
         run: |
