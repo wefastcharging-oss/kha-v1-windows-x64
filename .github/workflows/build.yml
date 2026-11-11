@@ -29,6 +29,11 @@ jobs:
           Invoke-WebRequest -Uri 'https://github.com/denuvosanctuary/steam-ticket-generator/releases/download/v1.2.1/steam-ticket-generator-windows.zip' -OutFile engine\stg.zip
           Expand-Archive engine\stg.zip -DestinationPath engine\ticket-generator -Force
           Get-ChildItem engine\ticket-generator -Filter *.exe | Where-Object Name -ne 'steam-ticket-generator.exe' | Rename-Item -NewName steam-ticket-generator.exe
+          Invoke-WebRequest -Uri 'https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_3.4.0/DepotDownloader-windows-x64.zip' -OutFile engine\dd.zip
+          Expand-Archive engine\dd.zip -DestinationPath engine\tools\depotdownloader -Force
+          Invoke-WebRequest -Uri 'https://github.com/atom0s/Steamless/releases/download/v3.1.0.5/Steamless.v3.1.0.5.-.by.atom0s.zip' -OutFile engine\sl.zip
+          Expand-Archive engine\sl.zip -DestinationPath engine\tools\steamless -Force
+          Remove-Item engine\stg.zip,engine\dd.zip,engine\sl.zip -ErrorAction SilentlyContinue
 
       - name: Compile ticket wrapper
         run: |
