@@ -6,5 +6,7 @@ contextBridge.exposeInMainWorld('khaDesktop',{
  request:(command,args={})=>ipcRenderer.invoke('kha:request',command,args),
  fixes:(command,args={})=>ipcRenderer.invoke('kha:fix',command,args),
  lua:(command,args={})=>ipcRenderer.invoke('kha:lua',command,args),
+ tools:(command,args={})=>ipcRenderer.invoke('kha:tools',command,args),
+ onToolsOutput:fn=>ipcRenderer.on('tools:output',(_e,msg)=>fn(msg)),
  onJobs:callback=>{if(typeof callback!=='function')return ()=>{};const handler=(_event,jobs)=>callback(jobs);ipcRenderer.on('kha:jobs',handler);return ()=>ipcRenderer.removeListener('kha:jobs',handler);}
 });
