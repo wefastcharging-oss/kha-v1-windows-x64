@@ -15,7 +15,7 @@
     "electron-builder": "26.0.12"
   },
   "build": {
-    "appId": "app.kha.library",
+    "appId": "app.kha.library","asar": false,
     "productName": "kha",
     "files": [
       "index.html",
