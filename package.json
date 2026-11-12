@@ -23,6 +23,8 @@
       "style.css",
       "steam-ui.js",
       "fixes-ui.js",
+      "tools-ui.js",
+      "ofix-ui.js",
       "assets/**/*",
       "main.cjs",
       "preload.cjs",
