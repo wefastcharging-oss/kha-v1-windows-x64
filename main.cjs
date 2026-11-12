@@ -17,7 +17,6 @@ if(!app.requestSingleInstanceLock()){app.quit();}else{
   require('./engine/ticket.cjs')(app,ipcMain,()=>win);
   require('./engine/tools.cjs')(app,ipcMain,()=>win);
   require('./engine/ofix.cjs')(app,ipcMain,()=>win);
-  require('./engine/tools.cjs')(app,ipcMain,()=>win);
   const engine=require('./engine/desktop.cjs')(app,ipcMain,()=>win);
   require('./engine/fixes.cjs')(app,ipcMain,()=>win,()=>engine.status().root);
   require('./engine/lua.cjs')(app,ipcMain,()=>win,()=>engine.status().root);
